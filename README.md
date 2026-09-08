@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![FastAPI Engine](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](Dockerfile)
+[![Docker Ready](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](Dockerfile)
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](tests/)
+[![Tests Passing](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](tests/)
 
 <p align="center">
   <b>Production-Grade High-Frequency API, Webhook & Server Monitoring SaaS platform with Instant Telegram Alerts & Cyberpunk Analytics Dashboard.</b>
@@ -16,39 +16,61 @@
 
 ---
 
-## 🌟 Architecture & Core Features
+## 🏛️ System Architecture & Heartbeat Flow
 
-- ⚡ **High-Frequency Async Probing:** Powered by `httpx` async workers with sub-10ms probe overhead.
-- 🚨 **Multi-Channel Alert Dispatch:** Instant incident alerts & recovery notices sent to Telegram groups / webhooks.
-- 📊 **Real-Time Latency Visualization:** Interactive Chart.js graphs mapping time-to-first-byte (TTFB) streams.
-- 🌐 **Public Status Page Generator:** Transparent system status dashboard for external customers.
-- 🔒 **Zero-Config SQLite Storage:** WAL-mode SQLite database with automatic incident tracking and 50-probe rolling SLA calculation.
-- 🐳 **Dockerized Deployment:** Ready for 1-click launch on any VPS or Cloud Run cluster.
+```mermaid
+graph TD
+    Monitor[⚡ PulseAPI Async Worker Pool] -->|Async HTTPX Probes <10ms| Target1[🌐 Target API 1]
+    Monitor -->|Async HTTPX Probes| Target2[🌐 Target Microservice 2]
+    Monitor -->|SSL Certificate Audit| SSL[🔒 SSL Expiration Tracker]
+    
+    Target1 --> Evaluator{SLA & Latency Evaluator}
+    Target2 --> Evaluator
+    SSL --> Evaluator
+    
+    subgraph Alerting & Analytics Engine
+        Evaluator -->|Incident Detected| Dispatcher[🚨 Telegram Alert Dispatcher]
+        Evaluator -->|Metrics Stream| DB[(🗄️ SQLite WAL Telemetry Storage)]
+        DB --> Dashboard[📊 Real-Time Chart.js Status Dashboard]
+    end
+    
+    Dispatcher --> Admin([📱 Telegram Channel / SRE Admin])
+```
 
 ---
 
-## 🚀 Quickstart
+## 🌟 Architecture & Core Features
 
-### 1. Run via Python / FastAPI:
+- ⚡ **High-Frequency Async Probing:** Powered by `httpx` async workers with sub-10ms probe overhead.
+- 🚨 **Multi-Channel Alert Dispatch:** Instant incident alerts & recovery notices sent to Telegram channels / webhooks.
+- 📊 **Real-Time Latency Visualization:** Interactive Chart.js graphs mapping time-to-first-byte (TTFB) streams.
+- 🌐 **Public Status Page Generator:** Transparent system status dashboard for external customers.
+- 🔒 **Zero-Config SQLite Storage:** WAL-mode SQLite database with automatic incident tracking and 50-probe rolling SLA calculation.
+- 🐳 **Dockerized Deployment:** Ready for 1-click launch on any VPS or Cloud cluster.
+
+---
+
+## 🚀 Quick Start (Docker & Local)
+
+### 1. Run via Docker Compose:
+```bash
+git clone https://github.com/salomh46-rgb/pulseapi-monitoring-saas.git
+cd pulseapi-monitoring-saas
+docker compose up -d --build
+```
+
+### 2. Run via FastAPI Server:
 ```bash
 cd server
 pip install -r requirements.txt
 uvicorn server.main:app --reload --port 8000
 ```
-
-### 2. Run via Docker Compose:
-```bash
-docker-compose up -d --build
-```
-
-### 3. Open Interactive Dashboard:
-Open `client/index.html` or deploy directly to Vercel/Netlify!
+Then open `client/index.html` to view the Live Status Dashboard!
 
 ---
 
 ## 🧪 Automated Testing
 
-Run the test suite with `pytest`:
 ```bash
 pytest -v tests/
 ```
@@ -56,14 +78,12 @@ pytest -v tests/
 ---
 
 ## 👨‍💻 Author
-
-**Javohirbek Asqarov (Jasper)**
-- GitHub: [@salomh46-rgb](https://github.com/salomh46-rgb)
-- Portfolio: [javohirbek-portfolio.vercel.app](https://javohirbek-portfolio.vercel.app/)
-- Telegram: [@Dr_eviluz](https://t.me/Dr_eviluz)
-- Email: [salomh46@gmail.com](mailto:salomh46@gmail.com)
+- **Architect:** [Javohirbek Asqarov (Jasper)](https://github.com/salomh46-rgb)
+- **Portfolio:** [bestportfoliyo-o4z2.vercel.app](https://bestportfoliyo-o4z2.vercel.app/)
+- **Telegram:** [@Dr_eviluz](https://t.me/Dr_eviluz)
+- **Email:** [salomh46@gmail.com](mailto:salomh46@gmail.com)
 
 ---
 
 ## 📄 License
-MIT © [Javohirbek Asqarov](LICENSE)
+MIT License © [Javohirbek Asqarov (Jasper)](LICENSE)
