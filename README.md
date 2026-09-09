@@ -49,7 +49,7 @@ flowchart TD
 - 🛠️ **Autonomous Self-Healing Pull Requests:** Automatically creates a feature branch, commits the fix, and opens a GitHub Pull Request with a unified diff.
 - 🛡️ **Offline Resilient Heuristic Engine:** Deterministic fallback pattern matching that generates valid unified patches even without an external LLM API key.
 - 📱 **Actionable Telegram SRE Alerts:** Detailed incident notices containing root-cause analysis, affected file line number, and a direct button to merge the PR.
-- 📊 **Cyberpunk Analytics Dashboard:** Live latency streams (Chart.js), real-time simulated incident injection, and visual unified diff inspector.
+- 📊 **shadcn/ui Minimal Dashboard:** Clean zinc theme (zero eye-strain), live latency streams (Chart.js), real-time simulated incident injection, and visual unified diff inspector.
 
 ---
 
@@ -57,8 +57,8 @@ flowchart TD
 
 ### 1. Clone & Install:
 ```bash
-git clone https://github.com/salomh46-rgb/pulseapi-monitoring.git
-cd pulseapi-monitoring
+git clone https://github.com/salomh46-rgb/pulseapi-monitoring-saas.git
+cd pulseapi-monitoring-saas
 pip install -r server/requirements.txt
 ```
 
@@ -110,7 +110,7 @@ All 7 core tests cover:
 > 
 > The project is open-source, written in FastAPI + SQLite, and includes a full live demo in the dashboard.
 > 
-> GitHub: https://github.com/salomh46-rgb/pulseapi-monitoring
+> GitHub: https://github.com/salomh46-rgb/pulseapi-monitoring-saas
 > 
 > Would love your feedback and brutal critiques on the architecture!
 
