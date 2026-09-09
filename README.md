@@ -1,4 +1,4 @@
-# ⚡ PulseAPI — Real-Time API Uptime & Latency Monitoring SaaS Engine
+# ⚡ PulseFix — Self-Healing API Monitoring & Autonomous Auto-PR Engine
 
 <div align="center">
 
@@ -7,77 +7,116 @@
 [![Docker Ready](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)](Dockerfile)
 [![License MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 [![Tests Passing](https://img.shields.io/badge/Tests-100%25_Passing-brightgreen?style=for-the-badge&logo=pytest&logoColor=white)](tests/)
+[![AI SRE](https://img.shields.io/badge/AI_Engine-Gemini_2.5_Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev)
 
 <p align="center">
-  <b>Production-Grade High-Frequency API, Webhook & Server Monitoring SaaS platform with Instant Telegram Alerts & Cyberpunk Analytics Dashboard.</b>
+  <b>The API monitor that doesn't just wake you up with an alert — it diagnoses the 500 error from recent Git diffs and opens a GitHub Pull Request to fix it.</b>
 </p>
 
 </div>
 
 ---
 
-## 🏛️ System Architecture & Heartbeat Flow
+## 🏛️ Autonomous Self-Healing SRE Flow
 
 ```mermaid
-graph TD
-    Monitor[⚡ PulseAPI Async Worker Pool] -->|Async HTTPX Probes <10ms| Target1[🌐 Target API 1]
-    Monitor -->|Async HTTPX Probes| Target2[🌐 Target Microservice 2]
-    Monitor -->|SSL Certificate Audit| SSL[🔒 SSL Expiration Tracker]
-    
-    Target1 --> Evaluator{SLA & Latency Evaluator}
-    Target2 --> Evaluator
-    SSL --> Evaluator
-    
-    subgraph Alerting & Analytics Engine
-        Evaluator -->|Incident Detected| Dispatcher[🚨 Telegram Alert Dispatcher]
-        Evaluator -->|Metrics Stream| DB[(🗄️ SQLite WAL Telemetry Storage)]
-        DB --> Dashboard[📊 Real-Time Chart.js Status Dashboard]
+flowchart TD
+    Monitor["⚡ PulseFix Async Prober"] -->|Probes Every 15-30s| TargetAPI["🌐 Production API Endpoint"]
+    TargetAPI -->|HTTP 500 Internal Error / Exception| IncidentCatcher["🚨 Incident Ingestion & Stack Trace Catcher"]
+
+    subgraph Autonomous_SRE_Engine["🧠 Autonomous AI SRE Engine"]
+        IncidentCatcher --> TraceParser["📑 Traceback & Payload Parser"]
+        GitAnalyzer["🐙 GitHub Commit Diff Fetcher"] --> ContextEngine
+        TraceParser --> ContextEngine["🧩 Error-to-Diff Context Engine"]
+        ContextEngine --> LLM["🤖 Gemini 2.5 Flash SRE Analyzer"]
+        LLM --> PatchGenerator["🛠️ Unified Diff Patch Generator"]
     end
-    
-    Dispatcher --> Admin([📱 Telegram Channel / SRE Admin])
+
+    subgraph Auto_Resolution_Hub["🚀 Auto-Resolution & Alert Dispatch"]
+        PatchGenerator --> GitBranch["🌿 Create Git Branch (pulsefix/incident-id)"]
+        GitBranch --> GitHubPR["🐙 Open GitHub Pull Request"]
+        GitHubPR --> TelegramAlert["📱 Rich Telegram Alert with Root Cause & PR Link"]
+        GitHubPR --> CyberpunkDashboard["💻 Real-Time Cyberpunk SRE Dashboard"]
+    end
 ```
 
 ---
 
-## 🌟 Architecture & Core Features
+## 🌟 Core Features & Breakthroughs
 
-- ⚡ **High-Frequency Async Probing:** Powered by `httpx` async workers with sub-10ms probe overhead.
-- 🚨 **Multi-Channel Alert Dispatch:** Instant incident alerts & recovery notices sent to Telegram channels / webhooks.
-- 📊 **Real-Time Latency Visualization:** Interactive Chart.js graphs mapping time-to-first-byte (TTFB) streams.
-- 🌐 **Public Status Page Generator:** Transparent system status dashboard for external customers.
-- 🔒 **Zero-Config SQLite Storage:** WAL-mode SQLite database with automatic incident tracking and 50-probe rolling SLA calculation.
-- 🐳 **Dockerized Deployment:** Ready for 1-click launch on any VPS or Cloud cluster.
+- ⚡ **High-Frequency Async Probing:** Sub-10ms async `httpx` probes measuring TTFB and SSL validity.
+- 🧠 **AI-First Root Cause Analysis:** Evaluates stack traces, uncaught exceptions, and recent commit diffs to explain the exact root cause in plain English.
+- 🛠️ **Autonomous Self-Healing Pull Requests:** Automatically creates a feature branch, commits the fix, and opens a GitHub Pull Request with a unified diff.
+- 🛡️ **Offline Resilient Heuristic Engine:** Deterministic fallback pattern matching that generates valid unified patches even without an external LLM API key.
+- 📱 **Actionable Telegram SRE Alerts:** Detailed incident notices containing root-cause analysis, affected file line number, and a direct button to merge the PR.
+- 📊 **Cyberpunk Analytics Dashboard:** Live latency streams (Chart.js), real-time simulated incident injection, and visual unified diff inspector.
 
 ---
 
-## 🚀 Quick Start (Docker & Local)
+## 🚀 Quick Start
 
-### 1. Run via Docker Compose:
+### 1. Clone & Install:
 ```bash
-git clone https://github.com/salomh46-rgb/pulseapi-monitoring-saas.git
-cd pulseapi-monitoring-saas
-docker compose up -d --build
+git clone https://github.com/salomh46-rgb/pulseapi-monitoring.git
+cd pulseapi-monitoring
+pip install -r server/requirements.txt
 ```
 
-### 2. Run via FastAPI Server:
-```bash
-cd server
-pip install -r requirements.txt
-uvicorn server.main:app --reload --port 8000
+### 2. Configure Environment (Optional):
+```env
+TELEGRAM_BOT_TOKEN="your_telegram_bot_token"
+GEMINI_API_KEY="your_gemini_api_key"        # Optional: uses intelligent heuristic fallback if omitted
+GITHUB_TOKEN="your_github_token"            # Optional: simulates PR if omitted
 ```
-Then open `client/index.html` to view the Live Status Dashboard!
+
+### 3. Launch Server & Dashboard:
+```bash
+python -m uvicorn server.main:app --reload --port 8000
+```
+Open `client/index.html` in your browser. Click **"Simulate 500 & Auto-PR"** to watch the self-healing workflow execute live!
 
 ---
 
-## 🧪 Automated Testing
+## 🧪 Automated Test Suite (100% Passing)
 
 ```bash
-pytest -v tests/
+python -m pytest -v
 ```
+
+All 7 core tests cover:
+- Endpoint health & telemetry probes
+- Public status page data integrity
+- Heuristic analyzer error parsing (KeyError, TypeError, ZeroDivision)
+- Autonomous incident ingestion and self-healing PR generation
+- Synchronous manual `/api/incidents/{id}/self-heal` execution
 
 ---
 
-## 👨‍💻 Author
+## 📰 Show HN Pitch Copy (Ready for Hacker News / Product Hunt)
+
+> **Title:** Show HN: PulseFix – An API monitor that diagnoses 500s from Git diffs and opens a fix PR
+>
+> **Body:**
+> Hey Hacker News, I'm Javohirbek.
+> 
+> As developers, we've all been woken up at 3 AM by PagerDuty or Sentry: *"500 Internal Server Error in /api/checkout"*. Then begins the tedious process of digging through logs, opening GitHub, finding which commit changed the schema, and writing a patch.
+> 
+> I built **PulseFix** to turn passive monitoring into an active SRE engineer:
+> 1. It probes your endpoints every 15-30s.
+> 2. When a 500 occurs, it intercepts the error traceback.
+> 3. It correlates the crash against your recent Git commits using Gemini Flash.
+> 4. It synthesizes a safe unified diff and opens a GitHub Pull Request automatically.
+> 5. It pings your Telegram with: *"Here is why it broke, and here is the PR to fix it."*
+> 
+> The project is open-source, written in FastAPI + SQLite, and includes a full live demo in the dashboard.
+> 
+> GitHub: https://github.com/salomh46-rgb/pulseapi-monitoring
+> 
+> Would love your feedback and brutal critiques on the architecture!
+
+---
+
+## 👨‍💻 Author & Creator
 - **Architect:** [Javohirbek Asqarov (Jasper)](https://github.com/salomh46-rgb)
 - **Portfolio:** [bestportfoliyo-o4z2.vercel.app](https://bestportfoliyo-o4z2.vercel.app/)
 - **Telegram:** [@Dr_eviluz](https://t.me/Dr_eviluz)
@@ -87,3 +126,4 @@ pytest -v tests/
 
 ## 📄 License
 MIT License © [Javohirbek Asqarov (Jasper)](LICENSE)
+

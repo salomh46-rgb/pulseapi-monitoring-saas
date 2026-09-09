@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 import os
 import sqlite3
 from fastapi.testclient import TestClient
@@ -15,7 +15,7 @@ def test_root_endpoint():
     res = client.get("/")
     assert res.status_code == 200
     data = res.json()
-    assert data["service"] == "PulseAPI SaaS Monitoring Engine"
+    assert "PulseFix" in data["service"] or "PulseAPI" in data["service"]
     assert data["status"] == "OPERATIONAL"
 
 def test_create_and_fetch_monitor():

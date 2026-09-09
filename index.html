@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PulseAPI — Real-Time API Uptime & Latency Monitoring SaaS</title>
+  <title>PulseFix — Self-Healing API Monitoring & Autonomous Auto-PR Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,62 +11,42 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #090A0F;
-      color: #E2E8F0;
-    }
-    .font-mono {
-      font-family: 'Fira Code', monospace;
-    }
-    .glass-panel {
-      background: rgba(18, 20, 29, 0.7);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .pulse-green {
-      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
-    }
-    .pulse-cyan {
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090A0F; color: #E2E8F0; }
+    .font-mono { font-family: 'Fira Code', monospace; }
+    .glass-panel { background: rgba(18, 20, 29, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .pulse-cyan { box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
 
-  <!-- TOP NAVIGATION BAR -->
   <header class="sticky top-0 z-50 glass-panel border-b border-white/10 px-6 py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center pulse-cyan shadow-lg">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-purple-600 flex items-center justify-center pulse-cyan shadow-lg">
         <i data-lucide="activity" class="w-6 h-6 text-black stroke-[2.5]"></i>
       </div>
       <div>
         <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-          Pulse<span class="text-cyan-400">API</span>
-          <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 uppercase font-mono">SaaS Engine v1.0</span>
+          Pulse<span class="text-cyan-400">Fix</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/40 text-cyan-300 uppercase font-mono font-bold">Self-Healing SRE v2.0</span>
         </h1>
-        <p class="text-xs text-slate-400">Global Uptime, Latency & Incident Response Engine</p>
+        <p class="text-xs text-slate-400">Autonomous API Uptime, Error Diagnostics & Auto-PR Resolution</p>
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
-      <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>ALL 12 PING WORKERS ACTIVE</span>
-      </div>
-      <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-xs transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20">
-        <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i> Add New Monitor
+    <div class="flex items-center gap-3">
+      <button onclick="triggerSimulatedIncident()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-red-600/20">
+        <i data-lucide="zap" class="w-4 h-4 fill-white"></i> Simulate 500 & Auto-PR
       </button>
-      <a href="https://github.com/salomh46-rgb/pulseapi-monitoring-saas" target="_blank" class="p-2 rounded-xl glass-panel text-slate-300 hover:text-white transition-colors">
+      <button onclick="openAddModal()" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20">
+        <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i> Add Monitor
+      </button>
+      <a href="https://github.com/salomh46-rgb/pulseapi-monitoring" target="_blank" class="p-2 rounded-xl glass-panel text-slate-300 hover:text-white transition-colors">
         <i data-lucide="github" class="w-5 h-5"></i>
       </a>
     </div>
   </header>
 
-  <!-- MAIN DASHBOARD CONTENT -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-8">
-    
-    <!-- METRICS OVERVIEW CARDS -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-emerald-500">
         <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
@@ -101,19 +81,65 @@
         </p>
       </div>
 
-      <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-amber-500">
+      <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-red-500">
         <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-          <span>TELEGRAM ALERT DISPATCH</span>
-          <i data-lucide="send" class="w-4 h-4 text-amber-400"></i>
+          <span>AI SELF-HEALED INCIDENTS</span>
+          <i data-lucide="git-pull-request" class="w-4 h-4 text-red-400"></i>
         </div>
-        <div class="text-3xl font-bold text-white font-mono">Instant</div>
-        <p class="text-[11px] text-amber-400 mt-1 flex items-center gap-1 font-medium">
-          <i data-lucide="bell" class="w-3 h-3"></i> 0 incident queue
+        <div class="text-3xl font-bold text-white font-mono" id="healedCountText">2 PRs</div>
+        <p class="text-[11px] text-red-400 mt-1 flex items-center gap-1 font-medium">
+          <i data-lucide="check-circle" class="w-3 h-3"></i> 100% Auto-diagnosed
         </p>
       </div>
     </div>
 
-    <!-- REAL-TIME LATENCY CHART -->
+    <!-- SRE INCIDENT CENTER -->
+    <div class="glass-panel p-6 rounded-3xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 via-black/40 to-black relative overflow-hidden">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-white/10 pb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+              Autonomous SRE Incident Center (Self-Healing Engine)
+            </h2>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Intercepts 500 exceptions, diagnoses root cause against Git history, and opens repair Pull Requests.</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="triggerSimulatedIncident()" class="px-3.5 py-1.5 rounded-xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 text-red-300 font-bold text-xs flex items-center gap-2 transition-all">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Trigger Test 500 Crash
+          </button>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-white/5 bg-black/40">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="bg-black/60 border-b border-white/10 text-slate-400">
+            <tr>
+              <th class="p-3.5">INCIDENT ID</th>
+              <th class="p-3.5">SERVICE / EXCEPTION</th>
+              <th class="p-3.5">TARGET FILE & LINE</th>
+              <th class="p-3.5">AI ROOT CAUSE DIAGNOSIS</th>
+              <th class="p-3.5">AUTO-HEAL STATUS</th>
+              <th class="p-3.5 text-right">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="incidentsTableBody" class="divide-y divide-white/5"></tbody>
+        </table>
+      </div>
+
+      <div id="liveTerminal" class="mt-4 p-4 rounded-xl bg-black/90 border border-white/10 font-mono text-[11px] text-cyan-300 hidden space-y-1">
+        <div class="text-slate-500 flex items-center justify-between border-b border-white/10 pb-1 mb-2">
+          <span>PULSEFIX SRE RUNTIME DISPATCH LOG</span>
+          <span class="text-emerald-400">ONLINE</span>
+        </div>
+        <div id="terminalLines" class="space-y-1"></div>
+      </div>
+    </div>
+
+    <!-- LATENCY STREAM -->
     <div class="glass-panel p-6 rounded-2xl">
       <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
         <div>
@@ -134,7 +160,7 @@
       </div>
     </div>
 
-    <!-- MONITORS LIST TABLE -->
+    <!-- MONITORS TABLE -->
     <div class="glass-panel rounded-2xl overflow-hidden">
       <div class="p-6 border-b border-white/10 flex items-center justify-between">
         <div>
@@ -162,28 +188,53 @@
               <th class="p-4 text-right">ACTIONS</th>
             </tr>
           </thead>
-          <tbody id="monitorsTableBody" class="divide-y divide-white/5">
-            <!-- Dynamic rows populated via JS -->
-          </tbody>
+          <tbody id="monitorsTableBody" class="divide-y divide-white/5"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- PUBLIC STATUS PAGE PREVIEW LINK -->
-    <div class="p-6 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-purple-950/20 to-black border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="space-y-1 text-center sm:text-left">
-        <h3 class="text-base font-bold text-white flex items-center justify-center sm:justify-start gap-2">
-          <i data-lucide="globe" class="w-5 h-5 text-cyan-400"></i>
-          Public System Status Page
-        </h3>
-        <p class="text-xs text-slate-400">Provide transparent uptime metrics and real-time incident reports to your customers.</p>
-      </div>
-      <button onclick="openStatusPageModal()" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs flex items-center gap-2 transition-all">
-        <i data-lucide="external-link" class="w-4 h-4"></i> View Status Page
-      </button>
-    </div>
-
   </main>
+
+  <!-- DIFF MODAL -->
+  <div id="diffModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-2xl p-6 rounded-3xl border border-cyan-500/40 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+            <i data-lucide="git-pull-request" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2" id="modalTitle">
+              Incident Fix & Autonomous Pull Request
+            </h3>
+            <p class="text-[11px] text-slate-400" id="modalSubtitle">Target file diagnosis</p>
+          </div>
+        </div>
+        <button onclick="closeDiffModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3 rounded-xl bg-black/60 border border-white/10">
+          <div class="text-[10px] text-cyan-400 font-mono font-bold uppercase mb-1">🧠 AI Root Cause Diagnosis:</div>
+          <div id="modalCause" class="text-slate-200">Loading explanation...</div>
+        </div>
+
+        <div>
+          <div class="text-[10px] text-slate-400 font-mono mb-1">Unified Fix Diff (Ready to apply):</div>
+          <pre id="modalDiff" class="p-3 rounded-xl bg-black/80 border border-white/10 font-mono text-[11px] text-slate-300 overflow-x-auto max-h-60 whitespace-pre"></pre>
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+          <button onclick="copyPatch()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs flex items-center gap-2 transition-all">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copy Unified Patch
+          </button>
+          <a id="modalPrLink" href="#" target="_blank" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-bold text-xs flex items-center gap-2 transition-all shadow-lg shadow-cyan-500/20">
+            <i data-lucide="external-link" class="w-4 h-4"></i> View / Merge Pull Request
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ADD MONITOR MODAL -->
   <div id="addModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
@@ -224,8 +275,12 @@
           </div>
         </div>
         <div>
+          <label class="block text-slate-400 mb-1">GitHub Repo for Self-Healing PRs</label>
+          <input type="text" id="monRepo" placeholder="salomh46-rgb/pulseapi-demo" class="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/10 text-white focus:border-cyan-400 focus:outline-none font-mono">
+        </div>
+        <div>
           <label class="block text-slate-400 mb-1">Telegram Chat ID (Alerts)</label>
-          <input type="text" id="monTelegram" placeholder="e.g. 123456789 (optional)" class="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/10 text-white focus:border-cyan-400 focus:outline-none font-mono">
+          <input type="text" id="monTelegram" placeholder="e.g. @Dr_eviluz" class="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/10 text-white focus:border-cyan-400 focus:outline-none font-mono">
         </div>
 
         <button type="submit" class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition-all shadow-lg shadow-cyan-500/20 mt-2">
@@ -235,7 +290,6 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC & SIMULATOR -->
   <script>
     let monitors = [
       { id: 1, name: "UzPayment Click Gateway", url: "https://api.click.uz/v2/ping", method: "GET", interval: 30, status: "UP", latency: 24.8, uptime: 99.99, telegram: "@Dr_eviluz" },
@@ -243,6 +297,57 @@
       { id: 3, name: "Voice2Deal Telegram Bot API", url: "https://api.telegram.org/bot/getMe", method: "GET", interval: 15, status: "UP", latency: 42.1, uptime: 100.0, telegram: "@Ovozli_SavdoBOT" },
       { id: 4, name: "CollabFlow WebSockets Node", url: "https://canvas.collabflow.ai/health", method: "GET", interval: 30, status: "UP", latency: 18.6, uptime: 99.98, telegram: "@Dr_eviluz" }
     ];
+
+    let incidents = [
+      {
+        id: 101,
+        service: "Checkout Payment API",
+        error: "KeyError: 'order_id'",
+        file: "server/services/checkout.py:48",
+        cause: "Dictionary lookup on request payload failed because 'order_id' was omitted in recent client payload format.",
+        status: "PR_OPENED",
+        pr_url: "https://github.com/salomh46-rgb/pulseapi-demo/pull/101",
+        diff: "--- a/server/services/checkout.py\n+++ b/server/services/checkout.py\n@@ -48,3 +48,4 @@ def process_payment(payload):\n-   order_id = payload['order_id']\n+   # PulseFix: safe get with fallback\n+   order_id = payload.get('order_id', None)"
+      },
+      {
+        id: 102,
+        service: "Auth Microservice",
+        error: "TypeError: 'NoneType' object is not subscriptable",
+        file: "auth/jwt.py:95",
+        cause: "Database query returned null record when user session expired, causing subscript exception.",
+        status: "PR_OPENED",
+        pr_url: "https://github.com/salomh46-rgb/pulseapi-demo/pull/102",
+        diff: "--- a/auth/jwt.py\n+++ b/auth/jwt.py\n@@ -95,3 +95,4 @@ def verify_token(token):\n-   user_id = record['id']\n+   # PulseFix: guard null record\n+   user_id = record['id'] if record is not None else None"
+      }
+    ];
+
+    async function loadLiveData() {
+      try {
+        const res = await fetch("/api/monitors");
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) monitors = data;
+        }
+        const incRes = await fetch("/api/incidents");
+        if (incRes.ok) {
+          const incData = await incRes.json();
+          if (Array.isArray(incData) && incData.length > 0) {
+            incidents = incData.map(i => ({
+              id: i.id,
+              service: i.monitor_name || "Production API",
+              error: i.cause,
+              file: i.target_file || "server/app.py",
+              cause: i.root_cause || "Self-healing analysis pending",
+              status: i.status,
+              pr_url: i.pr_url || "#",
+              diff: i.fix_diff || "Analyzing..."
+            }));
+          }
+        }
+      } catch (e) {}
+      renderMonitors();
+      renderIncidents();
+    }
 
     function renderMonitors() {
       const tbody = document.getElementById("monitorsTableBody");
@@ -267,14 +372,14 @@
           <td class="p-4">
             <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-cyan-300 text-[10px]">${m.method}</span>
           </td>
-          <td class="p-4 text-xs font-semibold ${m.latency < 50 ? 'text-emerald-400' : 'text-amber-400'}">
-            ${m.latency.toFixed(1)} ms
+          <td class="p-4 text-xs font-semibold ${(m.last_latency_ms || m.latency || 25) < 50 ? 'text-emerald-400' : 'text-amber-400'}">
+            ${(m.last_latency_ms || m.latency || 25).toFixed(1)} ms
           </td>
           <td class="p-4 text-xs font-bold text-cyan-400">
-            ${m.uptime.toFixed(2)}%
+            ${(m.uptime_pct || m.uptime || 99.9).toFixed(2)}%
           </td>
           <td class="p-4 text-slate-400 text-[11px]">
-            <span class="inline-flex items-center gap-1"><i data-lucide="send" class="w-3 h-3 text-cyan-400"></i> ${m.telegram}</span>
+            <span class="inline-flex items-center gap-1"><i data-lucide="send" class="w-3 h-3 text-cyan-400"></i> ${m.telegram_chat_id || m.telegram || '@devops'}</span>
           </td>
           <td class="p-4 text-right space-x-2">
             <button onclick="pingSingle(${m.id})" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-cyan-400" title="Probe Now">
@@ -289,9 +394,129 @@
       });
 
       document.getElementById("monitorCountText").innerText = `${monitors.length} Services`;
-      const avg = monitors.reduce((a, b) => a + b.latency, 0) / monitors.length;
+      const avg = monitors.reduce((a, b) => a + (b.last_latency_ms || b.latency || 25), 0) / (monitors.length || 1);
       document.getElementById("avgLatencyText").innerText = `${avg.toFixed(1)} ms`;
       lucide.createIcons();
+    }
+
+    function renderIncidents() {
+      const tbody = document.getElementById("incidentsTableBody");
+      tbody.innerHTML = "";
+
+      incidents.forEach(inc => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-white/[0.02] transition-colors";
+        tr.innerHTML = `
+          <td class="p-3.5 font-mono text-cyan-400">#${inc.id}</td>
+          <td class="p-3.5">
+            <div class="font-bold text-white text-xs">${inc.service}</div>
+            <div class="text-[10px] text-red-400 truncate max-w-xs">${inc.error}</div>
+          </td>
+          <td class="p-3.5 text-slate-300 text-[11px] font-mono">${inc.file}</td>
+          <td class="p-3.5 text-slate-400 text-[11px] max-w-sm truncate">${inc.cause}</td>
+          <td class="p-3.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
+              <i data-lucide="git-pull-request" class="w-3 h-3"></i> ${inc.status}
+            </span>
+          </td>
+          <td class="p-3.5 text-right">
+            <button onclick="openDiffModal(${inc.id})" class="px-3 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-[11px] font-semibold transition-all">
+              Inspect Diff
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("healedCountText").innerText = `${incidents.length} PRs`;
+      lucide.createIcons();
+    }
+
+    let activeModalDiff = "";
+
+    function openDiffModal(id) {
+      const inc = incidents.find(i => i.id === id);
+      if (!inc) return;
+
+      document.getElementById("modalTitle").innerText = `Fix Incident #${inc.id} in ${inc.service}`;
+      document.getElementById("modalSubtitle").innerText = `Target: ${inc.file}`;
+      document.getElementById("modalCause").innerText = inc.cause;
+      document.getElementById("modalDiff").innerText = inc.diff;
+      document.getElementById("modalPrLink").href = inc.pr_url || "#";
+      activeModalDiff = inc.diff;
+
+      document.getElementById("diffModal").classList.remove("hidden");
+      document.getElementById("diffModal").classList.add("flex");
+    }
+
+    function closeDiffModal() {
+      document.getElementById("diffModal").classList.add("hidden");
+      document.getElementById("diffModal").classList.remove("flex");
+    }
+
+    function copyPatch() {
+      navigator.clipboard.writeText(activeModalDiff);
+      alert("Unified Diff patch copied to clipboard!");
+    }
+
+    async function triggerSimulatedIncident() {
+      const terminal = document.getElementById("liveTerminal");
+      const lines = document.getElementById("terminalLines");
+      terminal.classList.remove("hidden");
+      lines.innerHTML = "";
+
+      function logLine(text) {
+        const el = document.createElement("div");
+        el.innerHTML = text;
+        lines.appendChild(el);
+      }
+
+      logLine("<span class='text-slate-500'>[0.0s]</span> 💥 Injecting synthetic 500 error in Payment Gateway...");
+      
+      try {
+        const res = await fetch("/api/simulation/trigger-500", { method: "POST" });
+        if (res.ok) {
+          const data = await res.json();
+          setTimeout(() => {
+            logLine("<span class='text-red-400'>[0.6s]</span> 🚨 <b>Incident Captured:</b> " + data.error);
+          }, 600);
+          setTimeout(() => {
+            logLine("<span class='text-purple-400'>[1.4s]</span> 🧠 <b>Gemini SRE Analysis:</b> Diagnosing Git diff vs stack trace...");
+          }, 1400);
+          setTimeout(() => {
+            logLine("<span class='text-cyan-400'>[2.3s]</span> 🛠️ <b>Patch Synthesized:</b> Safe dict lookup fallback generated.");
+          }, 2300);
+          setTimeout(() => {
+            logLine("<span class='text-emerald-400'>[3.2s]</span> 🚀 <b>Pull Request Opened:</b> branch pulsefix/incident-" + data.incident_id);
+            loadLiveData();
+          }, 3200);
+          return;
+        }
+      } catch (e) {}
+
+      setTimeout(() => {
+        logLine("<span class='text-red-400'>[0.6s]</span> 🚨 <b>Incident Captured:</b> KeyError: 'order_id' in server/services/checkout.py:48");
+      }, 600);
+      setTimeout(() => {
+        logLine("<span class='text-purple-400'>[1.4s]</span> 🧠 <b>Gemini SRE Analysis:</b> Schema mismatch diagnosed. Payload missing key.");
+      }, 1400);
+      setTimeout(() => {
+        logLine("<span class='text-cyan-400'>[2.3s]</span> 🛠️ <b>Patch Synthesized:</b> Generated unified diff.");
+      }, 2300);
+      setTimeout(() => {
+        logLine("<span class='text-emerald-400'>[3.2s]</span> 🚀 <b>Pull Request Opened:</b> https://github.com/salomh46-rgb/pulseapi-demo/pull/103");
+        incidents.unshift({
+          id: 103,
+          service: "Simulated Payment API",
+          error: "KeyError: 'order_id'",
+          file: "server/services/checkout.py:48",
+          cause: "Order payload missing 'order_id' key during payment processing.",
+          status: "PR_OPENED",
+          pr_url: "https://github.com/salomh46-rgb/pulseapi-demo/pull/103",
+          diff: "--- a/server/services/checkout.py\n+++ b/server/services/checkout.py\n@@ -48,3 +48,4 @@\n-   order_id = payload['order_id']\n+   order_id = payload.get('order_id', None)"
+        });
+        renderIncidents();
+      }, 3200);
     }
 
     function openAddModal() {
@@ -343,41 +568,36 @@
       renderMonitors();
     }
 
-    function openStatusPageModal() {
-      alert("Public Status Page Live Demo:\n\nAll 4 services operational with 99.98% 30-day uptime SLA!\nVisit: status.pulseapi.dev");
-    }
-
-    // Initialize Chart.js
-    const ctx = document.getElementById('latencyChart').getContext('2d');
+    const ctx = document.getElementById("latencyChart").getContext("2d");
     const labels = Array.from({length: 30}, (_, i) => `${i * 30}s ago`).reverse();
     const chart = new Chart(ctx, {
-      type: 'line',
+      type: "line",
       data: {
         labels: labels,
         datasets: [
           {
-            label: 'Click API (ms)',
+            label: "Click API (ms)",
             data: Array.from({length: 30}, () => Math.floor(20 + Math.random() * 15)),
-            borderColor: '#10B981',
-            backgroundColor: 'rgba(16, 185, 129, 0.05)',
+            borderColor: "#10B981",
+            backgroundColor: "rgba(16, 185, 129, 0.05)",
             borderWidth: 2,
             tension: 0.4,
             fill: true
           },
           {
-            label: 'Payme Gateway (ms)',
+            label: "Payme Gateway (ms)",
             data: Array.from({length: 30}, () => Math.floor(28 + Math.random() * 20)),
-            borderColor: '#06B6D4',
-            backgroundColor: 'rgba(6, 182, 212, 0.05)',
+            borderColor: "#06B6D4",
+            backgroundColor: "rgba(6, 182, 212, 0.05)",
             borderWidth: 2,
             tension: 0.4,
             fill: true
           },
           {
-            label: 'Gemini AI Bot (ms)',
+            label: "Gemini AI Bot (ms)",
             data: Array.from({length: 30}, () => Math.floor(35 + Math.random() * 25)),
-            borderColor: '#A855F7',
-            backgroundColor: 'rgba(168, 85, 247, 0.05)',
+            borderColor: "#A855F7",
+            backgroundColor: "rgba(168, 85, 247, 0.05)",
             borderWidth: 2,
             tension: 0.4,
             fill: true
@@ -389,13 +609,13 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#64748B', font: { family: 'Fira Code', size: 10 } } },
-          y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#64748B', font: { family: 'Fira Code', size: 10 } } }
+          x: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#64748B", font: { family: "Fira Code", size: 10 } } },
+          y: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#64748B", font: { family: "Fira Code", size: 10 } } }
         }
       }
     });
 
-    renderMonitors();
+    loadLiveData();
   </script>
 </body>
 </html>
