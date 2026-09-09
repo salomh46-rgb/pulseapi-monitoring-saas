@@ -1,4 +1,4 @@
-﻿import asyncio
+import asyncio
 import time
 import os
 import sqlite3
@@ -6,7 +6,8 @@ import httpx
 import re
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Request
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, HttpUrl
 
@@ -279,9 +280,37 @@ async def check_monitor(monitor_id: int):
     if incident_id_to_heal:
         asyncio.create_task(process_self_healing(incident_id_to_heal))
 
-# API Endpoints
+# Web & API Endpoints
 @app.get("/")
-def root():
+def root(request: Request):
+    accept = request.headers.get("accept", "")
+    if "text/html" in accept:
+        base_dir = os.path.dirname(os.path.dirname(__file__))
+        client_html = os.path.join(base_dir, "client", "index.html")
+        if os.path.exists(client_html):
+            return FileResponse(client_html, media_type="text/html")
+        root_html = os.path.join(base_dir, "index.html")
+        if os.path.exists(root_html):
+            return FileResponse(root_html, media_type="text/html")
+
+    return {
+        "service": "PulseFix Self-Healing SaaS Engine",
+        "status": "OPERATIONAL",
+        "version": "2.0.0",
+        "ai_sre": "ACTIVE",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+@app.get("/dashboard", response_class=FileResponse)
+def dashboard():
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    client_html = os.path.join(base_dir, "client", "index.html")
+    if os.path.exists(client_html):
+        return FileResponse(client_html, media_type="text/html")
+    return FileResponse(os.path.join(base_dir, "index.html"), media_type="text/html")
+
+@app.get("/api/health")
+def api_health():
     return {
         "service": "PulseFix Self-Healing SaaS Engine",
         "status": "OPERATIONAL",
