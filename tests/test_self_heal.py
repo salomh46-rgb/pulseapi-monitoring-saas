@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 import os
 import sqlite3
 from fastapi.testclient import TestClient
